@@ -21,7 +21,7 @@ def predict():
     try:
         # form data 
         data = request.form.to_dict()
-        data = {k: float(v) for k, v in data.items()}  # সব value কে float-এ convert করা
+        data = {k: float(v) for k, v in data.items()}  
         
         
         input_data = pd.DataFrame([data], columns=feature_names)
