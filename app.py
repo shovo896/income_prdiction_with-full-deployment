@@ -9,7 +9,7 @@ app = Flask(__name__)
 # Load trained model
 model = joblib.load('model.pkl')
 
-# Load feature names from preprocessing (optional)
+
 from preprocessing import X_train
 feature_names = X_train.columns.tolist()
 
