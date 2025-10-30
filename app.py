@@ -15,7 +15,7 @@ feature_names = X_train.columns.tolist()
 
 @app.route('/')
 def home():
-    return "<h2>🚀 Decision Tree Income Predictor is Running!</h2><p>Use /predict endpoint to send data.</p>"
+    return "<h2> Decision Tree Income Predictor is Running!</h2><p>Use /predict endpoint to send data.</p>"
 
 @app.route('/predict', methods=['POST'])
 def predict():
