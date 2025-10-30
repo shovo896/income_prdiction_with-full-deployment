@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-r from-blue-50 to-indigo-100 flex items-center justify-center h-screen font-sans">
+
+    <div class="bg-white shadow-2xl rounded-2xl p-10 text-center max-w-md">
+        <h1 class="text-3xl font-extrabold text-indigo-700 mb-4">🎯 Income Prediction Result</h1>
+
+        {% if prediction == "Income >50K" %}
+            <div class="p-6 rounded-xl bg-green-100 border-2 border-green-400">
+                <p class="text-2xl font-semibold text-green-700">💰 Predicted Income: >50K</p>
+                <p class="text-gray-600 mt-2">This person is likely to earn more than 50K per year.</p>
+            </div>
+        {% else %}
+            <div class="p-6 rounded-xl bg-yellow-100 border-2 border-yellow-400">
+                <p class="text-2xl font-semibold text-yellow-700">💼 Predicted Income: ≤50K</p>
+                <p class="text-gray-600 mt-2">This person is likely to earn 50K or less per year.</p>
+            </div>
+        {% endif %}
+
+        <div class="mt-8">
+            <a href="/" class="bg-indigo-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-indigo-700 transition">
+                🔙 Predict Again
+            </a>
+        </div>
+
+        <footer class="mt-8 text-gray-500 text-sm">
+            Developed by <span class="font-semibold text-indigo-600">Ahadul Haque Shovo</span> 
+        </footer>
+    </div>
+
+</body>
+</html>
