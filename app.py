@@ -1,52 +1,40 @@
 
-from flask import Flask, request, render_template, jsonify
+
+from flask import Flask, request, render_template
 import joblib
-import numpy as np
 import pandas as pd
+from preprocessing import X_train
 
 app = Flask(__name__)
 
-# Load trained model
+
 model = joblib.load('model.pkl')
-
-
-from preprocessing import X_train
 feature_names = X_train.columns.tolist()
+
 
 @app.route('/')
 def home():
-    return "<h2> Decision Tree Income Predictor is Running!</h2><p>Use /predict endpoint to send data.</p>"
+    return render_template('index.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    """
-    Example JSON input:
-    {
-        "age": 39,
-        "workclass": 4,
-        "fnlwgt": 77516,
-        "education": 9,
-        "education_num": 13,
-        "marital_status": 2,
-        "occupation": 1,
-        "relationship": 1,
-        "race": 4,
-        "gender": 1,
-        "capital_gain": 2174,
-        "capital_loss": 0,
-        "hours_per_week": 40,
-        "native_country": 39
-    }
-    """
     try:
-        data = request.get_json()
+        # form data 
+        data = request.form.to_dict()
+        data = {k: float(v) for k, v in data.items()}  # সব value কে float-এ convert করা
+        
+        
         input_data = pd.DataFrame([data], columns=feature_names)
+        
+        # Prediction করা
         prediction = model.predict(input_data)[0]
-
         result = "Income >50K" if prediction == 1 else "Income <=50K"
-        return jsonify({'prediction': result})
+        
+       
+        return render_template('result.html', prediction=result)
     except Exception as e:
-        return jsonify({'error': str(e)})
+        return render_template('result.html', prediction=f"Error: {e}")
 
 if __name__ == '__main__':
     app.run(debug=True)
+
